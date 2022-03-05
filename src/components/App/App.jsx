@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { nanoid } from 'nanoid';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,9 +8,9 @@ import ContactForm from '../ContactForm/ContactForm';
 import Filter from '../Filter/Filter';
 import { Wrapper } from './App.styled';
 import { GlobalStyle } from './App.styled';
-import { addContact, removeContact, changeFilter } from 'redux/sliceContacts/sliceContacts';
+import { addContact, removeContact } from 'redux/sliceContacts/sliceContacts';
+import { changeFilter } from 'redux/sliceFilter/sliceFilter';
 
-const LS_KEY = 'contacts';
 const contactId = nanoid();
 const numberId = nanoid();
 
@@ -19,16 +19,6 @@ const App = () => {
   const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
   const filteredContacts = getFilteredContacts();
-
-  console.log(contacts);
-
-  useEffect(() => {
-    const localStorageItems = JSON.parse(localStorage.getItem(LS_KEY));
-
-    if (localStorageItems) {
-      dispatch(addContact(localStorageItems));
-    }
-  }, [dispatch]);
 
   const onHandleSubmit = event => {
     event.preventDefault();
@@ -48,12 +38,7 @@ const App = () => {
     }
 
     const newContact = { id: nanoid(), name: contactName, number: contactPhone };
-    const newContacts = [
-      ...contacts,
-      newContact,
-    ];
 
-    localStorage.setItem(LS_KEY, JSON.stringify(newContacts));
     dispatch(addContact(newContact));
     form.reset();
   };

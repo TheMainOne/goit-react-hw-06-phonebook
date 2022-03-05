@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { List, Button, ListItem, Notification } from "./Contacts.styled";
 
 const Contacts = ({ contacts, filteredContacts, deleteContact }) => {
+
   return (
     <div>
       {contacts.length === 0 ? (
@@ -29,22 +30,22 @@ const Contacts = ({ contacts, filteredContacts, deleteContact }) => {
   );
 };
 
-// Contacts.propTypes = {
-//   contacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   filteredContacts: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.string.isRequired,
-//       name: PropTypes.string.isRequired,
-//       number: PropTypes.string.isRequired,
-//     })
-//   ),
-//   deleteContact: PropTypes.func.isRequired,
-// };
+Contacts.propTypes = {
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  filteredContacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+  deleteContact: PropTypes.func.isRequired,
+};
 
 export default Contacts;
